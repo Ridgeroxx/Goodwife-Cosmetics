@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Checkout | Goodwife Cosmetics</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+  <style>
+    .checkout-wrap { max-width: 980px; margin: 40px auto; padding: 16px; }
+    .checkout-card { border: 1px solid #eee; border-radius: 16px; padding: 16px; background: #fff; }
+    .row { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; }
+    @media (max-width: 840px){ .row { grid-template-columns: 1fr; } }
+    .line { display: grid; grid-template-columns: 64px 1fr auto; gap: 12px; align-items: center; padding: 8px 0; border-bottom: 1px solid #f2f2f2;}
+    .line:last-child{ border-bottom: 0; }
+    .line img{ width:64px; height:64px; object-fit: cover; border-radius: 8px; }
+    .summary { border: 1px solid #eee; border-radius: 16px; padding: 16px; background: #fff; }
+    .summary .row2 { display:flex; justify-content: space-between; margin: 6px 0; }
+    .btn-primary { width:100%; padding: 12px 14px; border-radius: 999px; background:#111; color:#fff; border:0; cursor:pointer; font-weight:700; }
+  </style>
+</head>
+<body>
+  <section class="checkout-wrap">
+    <h1>Checkout</h1>
+    <p id="hello-user" style="margin:8px 0 16px; color:#555;"></p>
+
+    <div class="row">
+      <div class="checkout-card">
+        <h3>Your Cart</h3>
+        <div id="checkout-lines"></div>
+      </div>
+
+      <div class="summary">
+        <h3>Summary</h3>
+        <div class="row2"><span>Subtotal</span><strong id="sum-sub">₵0.00</strong></div>
+        <div class="row2"><span>Shipping</span><span>Calculated at next step</span></div>
+        <hr style="border:0;border-top:1px solid #eee;margin:12px 0">
+        <div class="row2"><strong>Total</strong><strong id="sum-total">₵0.00</strong></div>
+        <button id="place-order" class="btn-primary" style="margin-top:12px;">Place Order</button>
+        <button id="back-to-cart" class="btn btn-secondary" style="width:100%;margin-top:8px;">Back to Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Simple helpers to mirror your main app
+    const CURRENCY = "₵";
+    const fmt = (n) => CURRENCY + Number(n||0).toFixed(2);
+    function getAuthUser(){ try{ return JSON.parse(localStorage.getItem('authUser')||'null'); }catch{ return null; } }
+    function getCart(){ try{ return JSON.parse(localStorage.getItem('cart')||'[]'); }catch{ return []; } }
+    function getProducts(){ try{ return window.localStorage.getItem('GW_PRODUCTS') ? JSON.parse(localStorage.getItem('GW_PRODUCTS')) : []; }catch{ return []; } }
+
+    // Build a products map from what your main page rendered (optional backup)
+    function byIdFromMain(id){
+      // Your main page didn't store products globally; so we reconstruct minimal product info from DOM snapshot saved earlier if present.
+      const bag = JSON.parse(localStorage.getItem('GW_PRODUCTS')||'[]');
+      return bag.find(p => p.id === id) || { name:"Item", image:"", price:0 };
+    }
+
+    function render(){
+      const user = getAuthUser();
+      if(!user){
+        // If somehow arrived here without login, bounce to login then back here
+        const target = encodeURIComponent(location.href);
+        location.href = `Sliding-Sign-In-Sign-Up-Form-master/login.html?redirect=${target}`;
+        return;
+      }
+      document.getElementById('hello-user').textContent = `Signed in as ${user.username || user.email}`;
+
+      const cart = getCart();
+      let sub = 0;
+      const lines = cart.map(ci => {
+        const p = byIdFromMain(ci.id);
+        const line = (p.price||0) * (ci.qty||1); sub += line;
+        return `
+          <div class="line">
+            <img src="${p.image}" alt="">
+            <div>
+              <div style="font-weight:600">${p.name}</div>
+              <div style="color:#777;font-size:13px">Qty: ${ci.qty||1}</div>
+            </div>
+            <div style="font-weight:700">${fmt(line)}</div>
+          </div>`;
+      }).join('');
+      document.getElementById('checkout-lines').innerHTML = lines || '<p>Your cart is empty.</p>';
+      document.getElementById('sum-sub').textContent = fmt(sub);
+      document.getElementById('sum-total').textContent = fmt(sub);
+    }
+
+    document.getElementById('place-order').addEventListener('click', ()=>{
+      alert('This is a demo. Hook your payment/fulfillment here.');
+    });
+    document.getElementById('back-to-cart').addEventListener('click', ()=>{
+      location.href = 'index.html#cart';
+    });
+
+    document.addEventListener('DOMContentLoaded', render);
+  </script>
+</body>
+</html>

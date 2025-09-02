@@ -1,0 +1,165 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body, input { font-family: "Poppins", sans-serif; background: #fff; color: #333; }
+
+/* Fixed brand top-left; above everything; non-blocking */
+.brand-fixed {
+  position: fixed; top: 16px; left: 16px; z-index: 9999; display: inline-block;
+}
+.brand-fixed img { width: 150px; height: auto; display: block; }
+@media (max-width: 570px) { .brand-fixed img { width: 120px; } }
+
+/* Give small top padding on tiny screens so brand doesn't overlap */
+@media (max-width: 570px) { .container { padding-top: 68px; } }
+
+.container {
+  position: relative; width: 100%; min-height: 100vh; overflow: hidden; background: #fff;
+}
+
+.forms-container { position: absolute; inset: 0; z-index: 5; }
+
+.signin-signup {
+  position: absolute; top: 50%; left: 75%; transform: translate(-50%, -50%);
+  width: 50%; transition: 1s 0.7s ease-in-out;
+  display: grid; grid-template-columns: 1fr; z-index: 5;
+}
+
+form {
+  display: flex; align-items: center; justify-content: center; flex-direction: column;
+  padding: 0 5rem; transition: all 0.2s 0.7s; overflow: hidden;
+  grid-column: 1/2; grid-row: 1/2;
+}
+form.sign-up-form { opacity: 0; z-index: 1; }
+form.sign-in-form { z-index: 2; }
+
+.title { font-size: 2.2rem; color: #444; margin-bottom: 10px; }
+
+.input-field {
+  max-width: 380px; width: 100%; background: #f0f0f0;
+  margin: 10px 0; height: 55px; border-radius: 55px;
+  display: grid; grid-template-columns: 15% 85%; padding: 0 0.4rem;
+}
+.input-field i { text-align: center; line-height: 55px; color: #acacac; transition: 0.5s; font-size: 1.1rem; }
+.input-field input {
+  background: none; outline: none; border: none; line-height: 1;
+  font-weight: 600; font-size: 1.1rem; color: #333;
+}
+.input-field input::placeholder { color: #aaa; font-weight: 500; }
+
+.social-text { padding: 0.7rem 0; font-size: 1rem; }
+.social-media { display: flex; justify-content: center; }
+.social-icon {
+  height: 46px; width: 46px; display: flex; justify-content: center; align-items: center;
+  margin: 0 0.45rem; color: #333; border-radius: 50%; border: 1px solid #333;
+  text-decoration: none; font-size: 1.1rem; transition: 0.3s;
+}
+.social-icon:hover { color: #4481eb; border-color: #4481eb; }
+
+.btn {
+  width: 150px; height: 49px; border-radius: 49px;
+  background: #5995fd; color: #fff; text-transform: uppercase; font-weight: 600;
+  margin: 10px 0; cursor: pointer; border: none; outline: none; transition: 0.5s;
+}
+.btn:hover { background: #4d84e2; }
+.btn.transparent { margin: 0; background: none; border: 2px solid #fff; width: 130px; height: 41px; font-weight: 600; font-size: 0.8rem; }
+
+.panels-container { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(2, 1fr); z-index: 2; }
+
+/* background blob under everything */
+.container:before {
+  content: ""; position: absolute; height: 2000px; width: 2000px; top: -10%; right: 48%;
+  transform: translateY(-50%); background-image: linear-gradient(-45deg, #4481eb 0%, #04befe 100%);
+  transition: 1.8s ease-in-out; border-radius: 50%; z-index: 1;
+}
+
+/* Panels */
+.panel { display: flex; flex-direction: column; align-items: center; justify-content: space-around; text-align: center; padding: 3rem 10%; }
+.left-panel { pointer-events: all; }
+.right-panel { pointer-events: none; }
+
+.panel .content { color: #fff; transition: transform 0.9s ease-in-out; transition-delay: 0.6s; }
+.panel h3 { font-weight: 600; line-height: 1; font-size: 1.5rem; }
+.panel p  { font-size: 1rem; padding: 0.7rem 0; }
+
+/* SVG Illustration sizing */
+.panels-container .image.art {
+  max-width: 360px; width: 100%; height: auto;
+  transition: transform 1.1s ease-in-out; transition-delay: 0.4s;
+}
+
+.right-panel .image, .right-panel .content { transform: translateX(800px); }
+
+/* ANIMATION STATES */
+.container.sign-up-mode:before { transform: translate(100%, -50%); right: 2%; }
+.container.sign-up-mode .signin-signup { left: 50%; }
+.container.sign-up-mode .left-panel { pointer-events: none; }
+.container.sign-up-mode .right-panel { pointer-events: all; }
+.container.sign-up-mode .left-panel .image,
+.container.sign-up-mode .left-panel .content { transform: translateX(-800px); }
+.container.sign-up-mode .right-panel .image,
+.container.sign-up-mode .right-panel .content { transform: translateX(0%); }
+.container.sign-up-mode form.sign-up-form { opacity: 1; z-index: 1; }
+.container.sign-up-mode form.sign-in-form { opacity: 0; z-index: 1; }
+
+/* RESPONSIVE */
+@media (max-width: 870px) {
+  .container { min-height: 800px; height: 100vh; }
+  .signin-signup { width: 100%; top: 95%; left: 50%; transform: translate(-50%, -100%); transition: 1s 0.8s ease-in-out; }
+  .container.sign-up-mode .signin-signup { top: 5%; transform: translate(-50%, 0); }
+  .panels-container { grid-template-columns: 1fr; grid-template-rows: 1fr 2fr 1fr; }
+  .panel { flex-direction: row; justify-content: space-around; padding: 2rem 6%; }
+  .right-panel { grid-row: 3 / 4; }
+  .left-panel  { grid-row: 1 / 2; }
+  .panels-container .image.art { max-width: 240px; }
+  .panel .content { padding: 0 8%; }
+  .container:before {
+    width: 1400px; height: 1400px; left: 30%; bottom: 68%;
+    right: initial; top: initial; transform: translateX(-50%); transition: 2s ease-in-out;
+  }
+  .container.sign-up-mode:before { bottom: 32%; left: 50%; transform: translate(-50%, 100%); }
+  .right-panel .image, .right-panel .content { transform: translateY(300px); }
+  .container.sign-up-mode .left-panel .image,
+  .container.sign-up-mode .left-panel .content { transform: translateY(-300px); }
+  .container.sign-up-mode .right-panel .image,
+  .container.sign-up-mode .right-panel .content { transform: translateY(0px); }
+}
+
+/* Fixed brand logo (top-left), consistent size, above everything */
+.brand-fixed {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 10000;
+  display: inline-block;
+}
+#brand-logo {
+  height: 48px;       /* nice, not huge */
+  width: auto;        /* keeps aspect ratio */
+  display: block;
+  object-fit: contain;
+}
+
+/* === Show the panel SVGs on small screens (override the display:none) === */
+@media (max-width: 570px) {
+  .panels-container .image.art {
+    display: block !important;   /* bring them back on phones */
+    max-width: 160px;            /* tidy size for small screens */
+    height: auto;
+    margin: 8px auto 0;          /* center nicely */
+    object-fit: contain;
+    pointer-events: none;        /* IMPORTANT: don't block clicks on inputs */
+    #brand-logo { height: 40px; }
+    .container { padding-top: 72px; }
+  }
+}
+
+/* (Optional but safe on all sizes) Ensure SVGs never steal pointer events */
+.panels-container .image.art { pointer-events: none; }
+
+
+
+/* Make panels sit above the forms layer so their buttons are clickable */
+.panels-container {
+  z-index: 60;          /* was 2; must be > .forms-container (5) */
+}

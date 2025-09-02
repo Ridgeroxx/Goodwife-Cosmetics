@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goodwife Cosmetics shop</title>
+    
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/css/lightgallery.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+<!-- header section starts  -->
+<header class="header">
+  <a href="index.html" class="logo" aria-label="Goodwife Cosmetics">
+    <img src="images/logo-2.png" alt="Goodwife Cosmetics logo">
+  </a>
+
+  <div class="icons">
+    <!-- keep the form so mobile styles still look right -->
+    <form id="login-form" action="Sliding-Sign-In-Sign-Up-Form-master/login.html">
+      <!-- Menu -->
+      <button id="menu-btn" type="button" class="icon-btn" aria-label="Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Search -->
+      <button id="search-btn" type="button" class="icon-btn" aria-label="Search">
+        <i class="fas fa-search"></i>
+      </button>
+
+      <!-- Wishlist -->
+      <button id="wishlist-btn" type="button" class="icon-btn" aria-label="Wishlist">
+        <i class="fas fa-heart"></i>
+        <span class="badge" id="wishlist-count">0</span>
+      </button>
+
+      <!-- Cart -->
+      <button id="cart-btn" type="button" class="icon-btn" aria-label="Cart">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="badge" id="cart-count">0</span>
+      </button>
+
+      <!-- Shown when NOT logged in -->
+      <input id="login-btn" type="submit" value="Login" class="btn solid" />
+    </form>
+
+    <!-- JS will inject avatar + dropdown here when logged in -->
+    <div id="account-anchor"></div>
+  </div>
+</header>
+<!-- header section ends -->
+
+<!-- navbar section  -->
+
+<nav class="navbar">
+    <div id="close-navbar" class="fas fa-times"></div>
+    <a href="#home">home</a>
+    <a href="#shop">shop</a>
+    <a href="#gallery">gallery</a>
+    <a href="#team">team</a>
+    <a href="#arrivals">arrivals</a>
+    <a href="#blogs">blogs</a>
+</nav>
+
+<!-- navbar section  -->
+
+<!-- header section ends -->
+
+<!-- home section starts  -->
+
+<section class="home" id="home">
+
+    <div class="slide active">
+        <div class="content">
+            <img src="images/content-img-1.png" alt="">
+            <span>new arrivals 2022</span>
+            <h3>cosmetics</h3>
+            <a href="#" class="btn">read more</a>
+            <div class="controls">
+                <div class="fas fa-angle-left" onclick="prev()"></div>
+                <div class="fas fa-angle-right" onclick="next()"></div>
+            </div>
+        </div>
+        <div class="image">
+            <img src="images/home-img-1.png" alt="">
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="content">
+            <img src="images/content-img-2.png" alt="">
+            <span>new arrivals 2022</span>
+            <h3>accessories</h3>
+            <a href="#" class="btn">read more</a>
+            <div class="controls">
+                <div class="fas fa-angle-left" onclick="prev()"></div>
+                <div class="fas fa-angle-right" onclick="next()"></div>
+            </div>
+        </div>
+        <div class="image">
+            <img src="images/home-img-2.png" alt="">
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="content">
+            <img src="images/content-img-3.png" alt="">
+            <span>new collections</span>
+            <h3>skin care</h3>
+            <a href="#" class="btn">read more</a>
+            <div class="controls">
+                <div class="fas fa-angle-left" onclick="prev()"></div>
+                <div class="fas fa-angle-right" onclick="next()"></div>
+            </div>
+        </div>
+        <div class="image">
+            <img src="images/home-img-3.png" alt="">
+        </div>
+    </div>
+
+</section>
+
+<!-- home section ends -->
+
+<!-- category section starts  -->
+
+<section class="category">
+
+    <a href="#" class="box">
+        <img src="images/category-1.png" alt="">
+        <p>cosmetics</p>
+    </a>
+
+    <a href="#" class="box">
+        <img src="images/category-2.png" alt="">
+        <p>makeup</p>
+    </a>
+
+    <a href="#" class="box">
+        <img src="images/category-3.png" alt="">
+        <p>powder</p>
+    </a>
+
+    <a href="#" class="box">
+        <img src="images/category-4.png" alt="">
+        <p>lotions</p>
+    </a>
+
+    <a href="#" class="box">
+        <img src="images/category-5.png" alt="">
+        <p>lipstick</p>
+    </a>
+
+    <a href="#" class="box">
+        <img src="images/category-6.png" alt="">
+        <p>mascara</p>
+    </a>
+
+</section>
+
+<!-- category section ends -->
+
+<!-- about section starts  -->
+
+<section class="about" id="about">
+
+    <div class="content">
+        <span>why choose us?</span>
+        <h3>makeup makes difference</h3>
+        <p>In only a couple of years, GoodWife Cosmetics has risen as the biggest beauty goal in Koforidua with a large portion of a thousands cheerful clients relying upon us for their most loved brands as well as for exhortation, refreshes, master tips, and recordings on the best way to look and feel dazzling dependably!</p>
+        <a href="https://thewordyboy.com/cosmetics-company-about-us/" class="redirect">read more</a>
+    </div>
+    
+</section>
+
+<!-- about section ends -->
+
+<!-- New, clean, responsive product grid -->
+<section class="catalog" id="catalog">
+  <div class="heading">
+    <h1>All Products</h1>
+    <p>Browse our collection. Use the search to filter.</p>
+  </div>
+  <div class="product-grid" id="all-products-grid"></div>
+</section>
+
+
+<!-- gallery section starts  -->
+
+<section class="gallery" id="gallery">
+
+    <div class="heading">
+        <h1>our gallery</h1>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quasi consequuntur officia beatae distinctio minus optio?</p>
+    </div>
+
+    <div class="lightbox">
+        <a href="images/Beauty-Formulas.jpg"><img src="images/Beauty-Formulas.jpg" alt=""></a>
+        <a href="images/s-l1600.jpg"><img src="images/s-l1600.jpg" alt=""></a>
+        <a href="images/Beauty_.jpg"><img src="images/Beauty_.jpg" alt=""></a>
+        <a href="images/Cerave.jpg"><img src="images/Cerave.jpg" alt=""></a>
+        <a href="images/Cereve.jpg"><img src="images/Cereve.jpg" alt=""></a>
+        <a href="images/Cerave1.jpg"><img src="images/Cerave1.jpg" alt=""></a>
+    </div>
+
+</section>
+
+<!-- gallery section ends -->
+
+<!-- team section starts  -->
+
+<section class="team" id="team">
+
+    <div class="heading">
+        <h1>our team</h1>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quasi consequuntur officia beatae distinctio minus optio?</p>
+    </div>
+
+    <div class="box-container">
+
+        <div class="box">
+            <div class="image">
+                <img src="images/team-1.png" alt="">
+                <div class="share">
+                    <a href="#" class="fab fa-facebook-f"></a>
+                    <a href="#" class="fab fa-twitter"></a>
+                    <a href="#" class="fab fa-instagram"></a>
+                    <a href="#" class="fab fa-linkedin"></a>
+                </div>
+            </div>
+            <div class="content">
+                <h3>Juliet Boakye</h3>
+                <p>make-up artist</p>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="image">
+                <img src="images/team-2.png" alt="">
+                <div class="share">
+                    <a href="#" class="fab fa-facebook-f"></a>
+                    <a href="#" class="fab fa-twitter"></a>
+                    <a href="#" class="fab fa-instagram"></a>
+                    <a href="#" class="fab fa-linkedin"></a>
+                </div>
+            </div>
+            <div class="content">
+                <h3>Victoria Aduako Boakye</h3>
+                <p>make-up artist</p>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="image">
+                <img src="images/team-3.png" alt="">
+                <div class="share">
+                    <a href="#" class="fab fa-facebook-f"></a>
+                    <a href="#" class="fab fa-twitter"></a>
+                    <a href="#" class="fab fa-instagram"></a>
+                    <a href="#" class="fab fa-linkedin"></a>
+                </div>
+            </div>
+            <div class="content">
+                <h3>Lois Boakye</h3>
+                <p>make-up artist</p>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- team section ends -->
+
+<!-- arrivals section starts  -->
+<!--Add-To-Cart-->
+
+<section class="arrivals" id="arrivals">
+
+    <div class="heading">
+        <h1>new arrivals</h1>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quasi consequuntur officia beatae distinctio minus optio?</p>
+    </div>
+
+    <div class="swiper arrivals-slider">
+
+        <div class="swiper-wrapper">
+
+            <div class="swiper-slide slide">
+                <div class="image">
+                    <span class="badge-new">NEW</span>
+                    <img src="images/arrival-1.jpg" alt="">
+                </div>
+                <div class="content">
+                    <p>beauty products</p>
+                    <div class="price">$49.99 <span>$79.99</span></div>
+                    <button type="button" class="btn add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="swiper-slide slide">
+                <div class="image">
+                    <span class="badge-new">NEW</span>
+                    <img src="images/arrival-2.jpg" alt="">
+                </div>
+                <div class="content">
+                    <p>beauty products</p>
+                    <div class="price">$49.99 <span>$79.99</span></div>
+                    <button type="button" class="btn add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="swiper-slide slide">
+                <div class="image">
+                    <span class="badge-new">NEW</span>
+                    <img src="images/arrival-3.jpg" alt="">
+                </div>
+                <div class="content">
+                    <p>beauty products</p>
+                    <div class="price">$49.99 <span>$79.99</span></div>
+                    <button type="button" class="btn add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="swiper-slide slide">
+                <div class="image">
+                    <span class="badge-new">NEW</span>
+                    <img src="images/arrival-4.jpg" alt="">
+                </div>
+                <div class="content">
+                    <p>beauty products</p>
+                    <div class="price">$49.99 <span>$79.99</span></div>
+                    <button type="button" class="btn add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="swiper-slide slide">
+                <div class="image">
+                    <span class="badge-new">NEW</span>
+                    <img src="images/arrival-5.jpg" alt="">
+                </div>
+                <div class="content">
+                    <p>beauty products</p>
+                    <div class="price">$49.99 <span>$79.99</span></div>
+                    <button type="button" class="btn add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="swiper-slide slide">
+                <div class="image">
+                    <span class="badge-new">NEW</span>
+                    <img src="images/arrival-6.jpg" alt="">
+                </div>
+                <div class="content">
+                    <p>beauty products</p>
+                    <div class="price">$49.99 <span>$79.99</span></div>
+                    <button type="button" class="btn add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="swiper-slide slide">
+                <div class="image">
+                    <span class="badge-new">NEW</span>
+                    <img src="images/arrival-7.jpg" alt="">
+                </div>
+                <div class="content">
+                    <p>beauty products</p>
+                    <div class="price">$49.99 <span>$79.99</span></div>
+                    <button type="button" class="btn add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="swiper-slide slide">
+                <div class="image">
+                    <span class="badge-new">NEW</span>
+                    <img src="images/arrival-8.jpg" alt="">
+                </div>
+                <div class="content">
+                    <p>beauty products</p>
+                    <div class="price">$49.99 <span>$79.99</span></div>
+                    <button type="button" class="btn add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="swiper-slide slide">
+                <div class="image">
+                    <span class="badge-new">NEW</span>
+                    <img src="images/Arrival-9.jpg" alt="">
+                </div>
+                <div class="content">
+                    <p>Facial Moisturizing Lotions</p>
+                    <div class="price">$49.99 <span>$79.99</span></div>
+                    <button type="button" class="btn add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="swiper-slide slide">
+                <div class="image">
+                    <span class="badge-new">NEW</span>
+                    <img src="images/Arrival-10.jpg" alt="">
+                </div>
+                <div class="content">
+                    <p>Exfoliate Paula's Choice</p>
+                    <div class="price">$49.99 <span>$79.99</span></div>
+                    <button type="button" class="btn add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="swiper-slide slide">
+                <div class="image">
+                    <span class="badge-new">NEW</span>
+                    <img src="images/Arrival-11.jpg" alt="">
+                </div>
+                <div class="content">
+                    <p>Amlactin Alpha-Hydroxy Therapy</p>
+                    <div class="price">$49.99 <span>$79.99</span></div>
+                    <button type="button" class="btn add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="swiper-slide slide">
+                <div class="image">
+                    <span class="badge-new">NEW</span>
+                    <img src="images/Arrival-12.jpg" alt="">
+                </div>
+                <div class="content">
+                    <p>Daily Moisturizing Face SPF 50+</p>
+                    <div class="price">$49.99 <span>$79.99</span></div>
+                    <button type="button" class="btn add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="swiper-slide slide">
+                <div class="image">
+                    <span class="badge-new">NEW</span>
+                    <img src="images/Arrival-13.jpg" alt="">
+                </div>
+                <div class="content">
+                    <p>PanOxyl Acne Foaming Wash</p>
+                    <div class="price">$49.99 <span>$79.99</span></div>
+                    <button type="button" class="btn add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="swiper-slide slide">
+                <div class="image">
+                    <span class="badge-new">NEW</span>
+                    <img src="images/Arrival-14.jpg" alt="">
+                </div>
+                <div class="content">
+                    <p>Even Tone Essentials Starter Kit</p>
+                    <div class="price">$49.99 <span>$79.99</span></div>
+                    <button type="button" class="btn add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="swiper-slide slide">
+                <div class="image">
+                    <span class="badge-new">NEW</span>
+                    <img src="images/Arrival-15.jpg" alt="">
+                </div>
+                <div class="content">
+                    <p>Yuja Niacin 30days Brightening Starter Kit</p>
+                    <div class="price">$49.99 <span>$79.99</span></div>
+                    <button type="button" class="btn add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+
+    </div>
+    
+</section>
+
+<!-- arrivals section ends -->
+
+<!-- reviews section starts  -->
+
+<section class="reviews">
+
+    <div class="swiper reviews-slider">
+
+        <div class="swiper-wrapper">
+
+            <div class="swiper-slide slide">
+                <div class="user">
+                    <img src="images/pic-1.png" alt="">
+                    <div class="info">
+                        <h3>Michaia Sakyi</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. In quis ipsa aspernatur incidunt iusto veniam cumque error quaerat officia. Aspernatur?</p>
+            </div>
+
+            <div class="swiper-slide slide">
+                <div class="user">
+                    <img src="images/pic-2.png" alt="">
+                    <div class="info">
+                        <h3>Lois Boakye</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum similique, numquam non, quasi, voluptatibus perspiciatis fugiat incidunt veniam nulla in aut aliquid necessitatibus nobis reiciendis ullam explicabo. Nulla, rem adipisci.</p>
+            </div>
+
+            <div class="swiper-slide slide">
+                <div class="user">
+                    <img src="images/pic-3.png" alt="">
+                    <div class="info">
+                        <h3>Vicky Boakye</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odit aliquid mollitia voluptatem alias illo officiis.</p>
+            </div>
+
+            <div class="swiper-slide slide">
+                <div class="user">
+                    <img src="images/pic-4.png" alt="">
+                    <div class="info">
+                        <h3>john deo</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. In quis ipsa aspernatur incidunt iusto veniam cumque error quaerat officia. Aspernatur?</p>
+            </div>
+
+            <div class="swiper-slide slide">
+                <div class="user">
+                    <img src="images/pic-5.png" alt="">
+                    <div class="info">
+                        <h3>Doctor Boakye</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus sequi minima sed obcaecati iste beatae quo praesentium, deleniti earum velit labore nobis voluptates a quam veniam delectus fugiat! Saepe, eos!</p>
+            </div>
+
+            <div class="swiper-slide slide">
+                <div class="user">
+                    <img src="images/pic-6.png" alt="">
+                    <div class="info">
+                        <h3>Claudia Sakyi</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. In quis ipsa aspernatur incidunt iusto veniam cumque error quaerat officia. Aspernatur?</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- reviews section ends  -->
+
+<!-- service section starts  -->
+
+<section class="service">
+
+    <div class="box">
+        <img src="images/service-1.png" alt="">
+        <h3>free shipping</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, fugit?</p>
+    </div>
+
+    <div class="box">
+        <img src="images/service-2.png" alt="">
+        <h3>secure payment</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, fugit?</p>
+    </div>
+
+    <div class="box">
+        <img src="images/service-3.png" alt="">
+        <h3>24/7 support</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, fugit?</p>
+    </div>
+
+</section>
+
+<!-- service section ends -->
+
+<!-- blogs section starts  -->
+
+<section class="blogs" id="blogs">
+
+    <div class="heading">
+        <h1>our daily blogs</h1>
+        <p>As your beauty amigo, we make your life a ton less complex by not just furnishing you with master counsel and direction, yet additionally by delivering items appropriate to your doorstep.</p>
+    </div>
+
+    <div class="swiper blogs-slider">
+
+        <div class="swiper-wrapper">
+
+            <div class="swiper-slide slide">
+                <div class="image">
+                    <img src="images/blog (1).jpg" alt="">
+                    <div class="icons">
+                        <a href="#"> <i class="fas fa-user"></i> by admin </a>
+                        <a href="#"> <i class="fas fa-clock"></i> 21st may, 2021 </a>
+                    </div>
+                </div>
+                <div class="content">
+                    <h3>blog title goes</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, debitis?</p>
+                    <a href="#" class="btn">read more</a>
+                </div>
+            </div>
+
+            <div class="swiper-slide slide">
+                <div class="image">
+                    <img src="images/blog (1).png" alt="">
+                    <div class="icons">
+                        <a href="#"> <i class="fas fa-user"></i> by admin </a>
+                        <a href="#"> <i class="fas fa-clock"></i> 21st may, 2021 </a>
+                    </div>
+                </div>
+                <div class="content">
+                    <h3>blog title goes</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, debitis?</p>
+                    <a href="#" class="btn">read more</a>
+                </div>
+            </div>
+
+            <div class="swiper-slide slide">
+                <div class="image">
+                    <img src="images/blog.png" alt="">
+                    <div class="icons">
+                        <a href="#"> <i class="fas fa-user"></i> by admin </a>
+                        <a href="#"> <i class="fas fa-clock"></i> 21st may, 2021 </a>
+                    </div>
+                </div>
+                <div class="content">
+                    <h3>blog title goes</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, debitis?</p>
+                    <a href="#" class="btn">read more</a>
+                </div>
+            </div>
+
+            <div class="swiper-slide slide">
+                <div class="image">
+                    <img src="images/Skincare-Shake-Up-Cerave-3-1440x1440.jpg" alt="">
+                    <div class="icons">
+                        <a href="#"> <i class="fas fa-user"></i> by admin </a>
+                        <a href="#"> <i class="fas fa-clock"></i> 21st may, 2021 </a>
+                    </div>
+                </div>
+                <div class="content">
+                    <h3>blog title goes</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, debitis?</p>
+                    <a href="#" class="btn">read more</a>
+                </div>
+            </div>
+
+            <div class="swiper-slide slide">
+                <div class="image">
+                    <img src="images/BRDerm_March21-blog_Daily-Skincare.jpeg" alt="">
+                    <div class="icons">
+                        <a href="#"> <i class="fas fa-user"></i> by admin </a>
+                        <a href="#"> <i class="fas fa-clock"></i> 15th December, 2022 </a>
+                    </div>
+                </div>
+                <div class="content">
+                    <h3>blog title goes</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, debitis?</p>
+                    <a href="#" class="btn">read more</a>
+                </div>
+            </div>
+
+            <div class="swiper-slide slide">
+                <div class="image">
+                    <img src="images/blog2.jpg" alt="">
+                    <div class="icons">
+                        <a href="#"> <i class="fas fa-user"></i> by admin </a>
+                        <a href="#"> <i class="fas fa-clock"></i> 15th December, 2022 </a>
+                    </div>
+                </div>
+                <div class="content">
+                    <h3>blog title goes</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, debitis?</p>
+                    <a href="#" class="btn">read more</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+
+    </div>
+
+</section>
+
+<!-- blogs section ends -->
+
+<!-- footer section starts  -->
+
+<section class="footer">
+
+    <div class="box-container">
+
+        <div class="box">
+            <h3>quick links</h3>
+            <a class="link" href="#home"> <i class="fas fa-angle-right"></i> home</a>
+            <a class="link" href="#shop"> <i class="fas fa-angle-right"></i> shop</a>
+            <a class="link" href="#gallery"> <i class="fas fa-angle-right"></i> gallery</a>
+            <a class="link" href="#team"> <i class="fas fa-angle-right"></i> team</a>
+            <a class="link" href="#arrivals"> <i class="fas fa-angle-right"></i> arrivals</a>
+            <a class="link" href="#blogs"> <i class="fas fa-angle-right"></i> blogs</a>
+        </div>
+
+        <div class="box">
+            <h3>extra links</h3>
+            <a href="#" class="link"> <i class="fas fa-angle-right"></i> my order </a>
+            <a href="#" class="link"> <i class="fas fa-angle-right"></i> my favorite </a>
+            <a href="#" class="link"> <i class="fas fa-angle-right"></i> my wishlist </a>
+            <a href="#" class="link"> <i class="fas fa-angle-right"></i> private policy </a>
+            <a href="#" class="link"> <i class="fas fa-angle-right"></i> terms of use </a>
+            <a href="" class="link"> <i class="fas fa-angle-right"></i> Login </a>
+
+        </div>
+
+        <div class="box">
+            <h3>contact info</h3>
+            <p> <i class="fas fa-phone"></i> +233-2042-89431 </p>
+            <p> <i class="fas fa-phone"></i> +233-2472-04314 </p>
+            <p> <i class="fas fa-envelope"></i>boakyevictoria155@gmail.com</p>
+            <p> <i class="fas fa-map"></i> Koforidua, Ghana - Freedom Stores </p>
+            <div class="share">
+                <a href="#" class="fab fa-facebook-f"></a>
+                <a href="#" class="fab fa-twitter"></a>
+                <a href="https://instagram.com/goodwifescosmectics?igshid=YmMyMTA2M2Y=" class="fab fa-instagram"></a>
+                <a href="#" class="fab fa-linkedin"></a>
+            </div>
+        </div>
+
+        <div class="box">
+            <h3>newsletter</h3>
+            <p>subscribe for latest updates</p>
+            <form action="">
+                <input type="email" name="" placeholder="enter your email" id="" class="email">
+                <input type="submit" value="subscribe" class="btn">
+            </form>
+        </div>
+
+    </div>
+
+    <div class="credit"> created by <span>RoxxSoftworks</span> | all rights reserved!</div><br>+233-2097-07452
+
+</section>
+
+<!-- Drawer overlay -->
+<div class="drawer-overlay" id="drawer-overlay"></div>
+
+<!-- CART DRAWER (slides in from the right) -->
+<aside class="drawer" id="cart-drawer" aria-hidden="true">
+  <div class="drawer-header">
+    <h3>My Cart</h3>
+    <button class="drawer-close" data-drawer-close="cart-drawer" aria-label="Close">&times;</button>
+  </div>
+  <div class="drawer-body" id="cart-items"></div>
+  <div class="drawer-footer">
+    <div class="subtotal">
+      <span>Subtotal</span>
+      <strong id="cart-subtotal">₵0.00</strong>
+    </div>
+    <button class="btn btn-primary" id="checkout-btn">Checkout</button>
+    <button class="btn btn-secondary" id="clear-cart-btn">Clear Cart</button>
+  </div>
+</aside>
+
+<!-- WISHLIST DRAWER -->
+<aside class="drawer" id="wishlist-drawer" aria-hidden="true">
+  <div class="drawer-header">
+    <h3>Wishlist</h3>
+    <button class="drawer-close" data-drawer-close="wishlist-drawer" aria-label="Close">&times;</button>
+  </div>
+  <div class="drawer-body" id="wishlist-items"></div>
+</aside>
+
+<!-- SEARCH PANEL -->
+<div class="search-panel" id="search-panel" aria-hidden="true">
+  <div class="search-bar">
+    <input type="search" id="product-search-input" placeholder="Search products..." />
+    <button id="search-close" aria-label="Close">&times;</button>
+  </div>
+  <div class="search-results">
+    <div class="product-grid" id="search-results-grid"></div>
+  </div>
+</div>
+
+<!-- footer section ends -->
+
+<!-- JS libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+<!-- custom js file link  -->
+<script src="js/script.js"></script>
+
+<script>
+  // Lightbox init (guard if element exists)
+  (function(){
+    var lb = document.querySelector('.gallery .lightbox');
+    if (lb && window.lightGallery) lightGallery(lb);
+  })();
+</script>
+
+</body>
+</html>
