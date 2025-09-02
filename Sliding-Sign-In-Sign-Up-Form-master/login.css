@@ -17,7 +17,10 @@ body, input { font-family: "Poppins", sans-serif; background: #fff; color: #333;
   position: relative; width: 100%; min-height: 100vh; overflow: hidden; background: #fff;
 }
 
-.forms-container { position: absolute; inset: 0; z-index: 5; }
+.forms-container {
+  pointer-events: auto;   /* or just remove the old pointer-events rule */
+  z-index: 5;             /* fine to keep this */
+}
 
 .signin-signup {
   position: absolute; top: 50%; left: 75%; transform: translate(-50%, -50%);
@@ -161,5 +164,5 @@ form.sign-in-form { z-index: 2; }
 
 /* Make panels sit above the forms layer so their buttons are clickable */
 .panels-container {
-  z-index: 60;          /* was 2; must be > .forms-container (5) */
+  z-index: 2;         /* was 2; must be > .forms-container (5) */
 }
