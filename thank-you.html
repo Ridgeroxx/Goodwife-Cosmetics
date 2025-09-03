@@ -1,19 +1,309 @@
 <!DOCTYPE html>
-<html><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Thanks!</title>
-<style>
-  body{font-family: Poppins,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; display:grid; place-items:center; min-height:100vh; margin:0}
-  .box{max-width:620px; padding:24px; border:1px solid #eee; border-radius:16px; text-align:center}
-</style>
-</head><body>
-  <div class="box">
-    <h1>Thank you for your order 🎉</h1>
-    <p id="msg">We’ve received it and will be in touch shortly.</p>
-    <p><a href="index.html">Back to Home</a></p>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Thank You | Goodwife Cosmetics</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"/>
+
+  <style>
+    :root{
+      --bg1:#7c3aed; --bg2:#06b6d4; --ok:#10b981; --ink:#101828; --muted:#667085; --card:#ffffff;
+      --ring: rgba(16,185,129,.3);
+      --shadow: 0 10px 30px rgba(17,24,39,.15);
+      --radius: 20px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--ink); overflow-x:hidden;
+      /* animated gradient bg */
+      background: linear-gradient(135deg,var(--bg1),var(--bg2));
+      background-size: 200% 200%;
+      animation: bgMove 12s ease-in-out infinite;
+      position:relative;
+    }
+    @keyframes bgMove{
+      0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%}
+    }
+
+    /* layout */
+    .wrap{min-height:100%; display:grid; place-items:center; padding:24px}
+    .card{
+      width:min(960px,92vw);
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      transform: translateY(12px);
+      opacity:0;
+      animation: riseIn .7s ease .2s forwards;
+    }
+    @keyframes riseIn{to{transform:none; opacity:1}}
+
+    /* header with big check */
+    .hero{
+      position:relative; padding:48px 24px 12px;
+      display:grid; justify-items:center; text-align:center;
+      background:
+        radial-gradient(1200px 1200px at 50% -300px, rgba(255,255,255,.4), rgba(255,255,255,0));
+    }
+    .checkwrap{
+      width:120px; height:120px; border-radius:50%;
+      display:grid; place-items:center;
+      background: #ecfdf5; border:1px solid #d1fae5; box-shadow: inset 0 0 0 6px #f0fdf4;
+      margin-bottom:18px; position:relative;
+    }
+    svg{display:block}
+    .ring{
+      stroke: var(--ok); stroke-width: 6; fill:none; stroke-linecap:round;
+      stroke-dasharray: 345; stroke-dashoffset: 345; animation: draw 1.1s ease .25s forwards;
+      filter: drop-shadow(0 6px 16px var(--ring));
+    }
+    .tick{
+      stroke: var(--ok); stroke-width: 6; fill:none; stroke-linecap:round; stroke-linejoin:round;
+      stroke-dasharray: 80; stroke-dashoffset: 80; animation: draw .8s ease .6s forwards;
+      filter: drop-shadow(0 6px 16px var(--ring));
+    }
+    @keyframes draw{to{stroke-dashoffset:0}}
+
+    h1{margin:8px 0 4px; font-size:clamp(24px,3.2vw,34px); line-height:1.2}
+    .subtitle{margin:0; color:var(--muted); font-size:clamp(14px,2.2vw,16px)}
+
+    /* content columns */
+    .content{display:grid; grid-template-columns: 1.1fr .9fr; gap:22px; padding:24px}
+    @media (max-width: 880px){ .content{grid-template-columns:1fr} }
+
+    .panel{
+      border:1px solid #eef2f7; border-radius:16px; padding:18px;
+      background:#fff;
+    }
+    .panel h2{margin:0 0 12px; font-size:18px}
+
+    /* items list */
+    .items{display:grid; gap:12px}
+    .item{
+      display:grid; grid-template-columns:64px 1fr auto; gap:12px; align-items:center;
+      padding:10px; border:1px solid #f1f3f6; border-radius:12px;
+    }
+    .item img{
+      width:64px; height:64px; object-fit:cover; border-radius:10px; border:1px solid #eee;
+      background:#f7f7f7;
+    }
+    .name{font-weight:600}
+    .muted{color:var(--muted)}
+    .price{font-weight:700}
+
+    /* totals */
+    .split{display:flex; justify-content:space-between; margin:6px 0}
+    .split.total{font-size:18px; margin-top:10px}
+
+    /* actions */
+    .actions{
+      display:flex; flex-wrap:wrap; gap:12px; justify-content:center; padding:6px 24px 28px;
+    }
+    .btn{
+      appearance:none; border:0; border-radius:999px; padding:12px 18px; font-weight:700;
+      cursor:pointer; transition: transform .1s ease, box-shadow .2s ease;
+    }
+    .btn:active{transform:translateY(1px)}
+    .btn-primary{
+      background:#111; color:#fff; box-shadow:0 8px 20px rgba(0,0,0,.18);
+    }
+    .btn-ghost{
+      background:#fff; color:#111; border:1px solid #e5e7eb;
+    }
+
+    /* floating shapes for ambience */
+    .float{
+      position:absolute; inset:auto; pointer-events:none; opacity:.25; filter: blur(8px);
+      animation: drift 16s ease-in-out infinite;
+    }
+    .f1{top: -30px; left: -30px; width:180px; height:180px; background:#fff; border-radius:50%}
+    .f2{right:-40px; top:-20px; width:220px; height:220px; background:linear-gradient(135deg,#fff,transparent); border-radius:40px}
+    @keyframes drift{
+      0%,100%{transform: translateY(0)}
+      50%{transform: translateY(20px)}
+    }
+
+    /* confetti canvas */
+    #confetti{position:fixed; inset:0; pointer-events:none; z-index:10}
+  </style>
+</head>
+<body>
+  <canvas id="confetti"></canvas>
+
+  <div class="wrap">
+    <div class="card" role="status" aria-live="polite">
+      <div class="hero">
+        <div class="float f1"></div>
+        <div class="float f2"></div>
+
+        <div class="checkwrap" aria-hidden="true">
+          <svg width="120" height="120" viewBox="0 0 120 120">
+            <circle class="ring" cx="60" cy="60" r="55"/>
+            <polyline class="tick" points="36,63 53,78 84,45"/>
+          </svg>
+        </div>
+
+        <h1>Thank you for your order! 🎉</h1>
+        <p class="subtitle" id="subtitle">We’ve received it and will be in touch shortly.</p>
+      </div>
+
+      <div class="content" id="content">
+        <!-- Left: Order items -->
+        <div class="panel">
+          <h2>Order Items</h2>
+          <div class="items" id="items"></div>
+        </div>
+
+        <!-- Right: Summary -->
+        <div class="panel">
+          <h2>Summary</h2>
+          <div class="split"><span>Order ID</span><strong id="oid">—</strong></div>
+          <div class="split"><span>Customer</span><span class="muted" id="cust">—</span></div>
+          <hr style="border:none;border-top:1px solid #eef2f7;margin:10px 0">
+          <div class="split"><span>Subtotal</span><strong id="sub">₵0.00</strong></div>
+          <div class="split"><span>Shipping</span><strong id="ship">₵0.00</strong></div>
+          <div class="split total"><span>Total</span><strong id="tot">₵0.00</strong></div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <a class="btn btn-primary" href="index.html">Continue Shopping</a>
+        <a class="btn btn-ghost" href="profile.html">View Orders</a>
+      </div>
+    </div>
   </div>
-<script>
-  const id = new URLSearchParams(location.search).get("id");
-  if(id) document.getElementById("msg").textContent = "Order " + id + " received. We’ll be in touch shortly.";
+
+  <script>
+(() => {
+  // --- helpers / constants
+  const CURRENCY = "₵";
+  const fmt = (n) => CURRENCY + Number(n || 0).toFixed(2);
+  const PLACEHOLDER =
+    'data:image/svg+xml;utf8,' +
+    encodeURIComponent(
+      '<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120"><rect width="100%" height="100%" fill="#f2f2f2"/><text x="50%" y="52%" font-size="14" fill="#999" text-anchor="middle" dominant-baseline="middle">No image</text></svg>'
+    );
+
+  const ORDERS_KEY = "gw_orders";
+  const PRODUCTS_KEY = "GW_PRODUCTS";
+
+  // --- load latest order (by ?id=... or most recent)
+  const idFromUrl = new URLSearchParams(location.search).get("id");
+  let orders = [];
+  try { orders = JSON.parse(localStorage.getItem(ORDERS_KEY) || "[]"); } catch {}
+  let order = idFromUrl
+    ? orders.find(o => String(o.id) === String(idFromUrl))
+    : orders[0] || null;
+
+  // --- load catalog once and map by id
+  let products = [];
+  try { products = JSON.parse(localStorage.getItem(PRODUCTS_KEY) || "[]"); } catch {}
+  const productMap = new Map(products.map(p => [p.id, p]));
+
+  // --- backfill missing images from catalog
+  if (order && Array.isArray(order.items)) {
+    order.items = order.items.map(i => {
+      const p = productMap.get(i.id) || {};
+      return { ...i, image: i.image || p.image || "" };
+    });
+  }
+
+  // --- render
+  function render() {
+    const content = document.getElementById("content"); // optional wrapper
+    const itemsEl = document.getElementById("items");
+    const subEl   = document.getElementById("sub");
+    const shipEl  = document.getElementById("ship");
+    const totEl   = document.getElementById("tot");
+    const oidEl   = document.getElementById("oid");
+    const custEl  = document.getElementById("cust");
+    const subtEl  = document.getElementById("subtitle");
+
+    if (!order) {
+      if (content) {
+        content.innerHTML = '<div class="panel" style="grid-column:1/-1;text-align:center">We couldn’t find your order details, but your request was received. If you need help, contact support.</div>';
+      }
+      return;
+    }
+
+    // header info
+    if (oidEl) oidEl.textContent = order.id || "—";
+    const name  = order.contact?.fullName || order.user?.username || "Customer";
+    const email = order.contact?.email    || order.user?.email    || "";
+    if (custEl) custEl.textContent = email ? `${name} • ${email}` : name;
+    if (subtEl) subtEl.textContent = `Order ${order.id} received. We’ll be in touch shortly.`;
+
+    // items
+    if (itemsEl) {
+      itemsEl.innerHTML = (order.items || []).map(i => `
+        <div class="item">
+          <img src="${i.image || PLACEHOLDER}"
+               alt="${(i.name || 'Item').replace(/"/g,'&quot;')}"
+               onerror="this.src='${PLACEHOLDER}'">
+          <div>
+            <div class="name">${i.name || 'Item'}</div>
+            <div class="muted">Qty: ${i.qty || 1}</div>
+          </div>
+          <div class="price">${fmt((i.price || 0) * (i.qty || 1))}</div>
+        </div>
+      `).join("");
+    }
+
+    // totals (defensive recompute)
+    const subtotal = (order.items || []).reduce((s, i) => s + Number(i.price || 0) * Number(i.qty || 1), 0);
+    const shipping = Number(order.shipping ?? 0);
+    const total    = subtotal + shipping;
+
+    if (subEl)  subEl.textContent  = fmt(subtotal);
+    if (shipEl) shipEl.textContent = fmt(shipping);
+    if (totEl)  totEl.textContent  = fmt(total);
+  }
+
+  render();
+
+  // --- simple confetti (no deps) — only run if canvas exists
+  (function confetti(){
+    const canvas = document.getElementById('confetti');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let w = canvas.width = innerWidth;
+    let h = canvas.height = innerHeight;
+    addEventListener('resize', () => { w = canvas.width = innerWidth; h = canvas.height = innerHeight; });
+
+    const colors = ['#34d399','#22d3ee','#a78bfa','#f472b6','#facc15'];
+    const pieces = Array.from({length: 140}, () => ({
+      x: Math.random()*w, y: -20 - Math.random()*h*0.4,
+      r: 4 + Math.random()*6,
+      c: colors[Math.floor(Math.random()*colors.length)],
+      vx: -1 + Math.random()*2,
+      vy: 2 + Math.random()*3,
+      a: Math.random()*Math.PI*2,
+      va: -0.1 + Math.random()*0.2
+    }));
+
+    let t = 0, duration = 180; // ~3s
+    (function tick(){
+      ctx.clearRect(0,0,w,h);
+      pieces.forEach(p=>{
+        p.x += p.vx; p.y += p.vy; p.a += p.va;
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.a);
+        ctx.fillStyle = p.c;
+        ctx.fillRect(-p.r/2, -p.r/2, p.r, p.r);
+        ctx.restore();
+      });
+      if (++t < duration) requestAnimationFrame(tick);
+      else ctx.clearRect(0,0,w,h);
+    })();
+  })();
+})();
 </script>
-</body></html>
+</body>
+</html>

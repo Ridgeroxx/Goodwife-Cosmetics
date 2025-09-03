@@ -92,115 +92,133 @@
 (() => {
   const CURRENCY = "₵";
   const fmt = (n) => CURRENCY + Number(n || 0).toFixed(2);
-  const ADMIN_EMAIL = "orders@goodwife.example"; // TODO: change to your real admin email
+  const ADMIN_EMAIL = "orders@goodwife.example"; // TODO: set real admin email
   const CART_KEY = "cart";
   const USER_KEY = "gw_current_user";
 
-  // fallback placeholder image (prevents broken image icon)
-  const PLACEHOLDER_IMG = 'data:image/svg+xml;utf8,' +
-    encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120"><rect width="100%" height="100%" fill="#f2f2f2"/><text x="50%" y="52%" font-size="14" fill="#999" text-anchor="middle" dominant-baseline="middle">No image</text></svg>');
+  // Fallback placeholder image (prevents broken icon)
+  const PLACEHOLDER_IMG =
+    'data:image/svg+xml;utf8,' +
+    encodeURIComponent(
+      '<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120"><rect width="100%" height="100%" fill="#f2f2f2"/><text x="50%" y="52%" font-size="14" fill="#999" text-anchor="middle" dominant-baseline="middle">No image</text></svg>'
+    );
 
-  function getUser(){ try{return JSON.parse(localStorage.getItem(USER_KEY)||"null")}catch{return null} }
-  function getCart(){ try{return JSON.parse(localStorage.getItem(CART_KEY)||"[]")}catch{return []} }
-  function getProducts(){ try{return JSON.parse(localStorage.getItem("GW_PRODUCTS")||"[]")}catch{return []} }
-  function findProduct(id){ return (getProducts().find(p=>p.id===id) || null); }
+  // Helpers
+  function getUser(){ try { return JSON.parse(localStorage.getItem(USER_KEY) || "null"); } catch { return null; } }
+  function getCart(){ try { return JSON.parse(localStorage.getItem(CART_KEY) || "[]"); } catch { return []; } }
+  function getProducts(){ try { return JSON.parse(localStorage.getItem("GW_PRODUCTS") || "[]"); } catch { return []; } }
+  function findProduct(id){ return getProducts().find(p => p.id === id) || null; }
 
   // --- guard: must be logged in
   (function guard(){
     const u = getUser();
-    if(!u){
+    if (!u) {
       const back = encodeURIComponent(location.href);
       location.href = "Sliding-Sign-In-Sign-Up-Form-master/login.html?redirect=" + back;
     }
   })();
 
   // --- render summary
-  const cart = getCart();
+  const cart  = getCart();
   const listEl = document.getElementById("summary-items");
   const subEl  = document.getElementById("subtot");
   const shipEl = document.getElementById("ship");
   const totEl  = document.getElementById("total");
 
-  // empty cart UX
   if (!cart.length) {
     listEl.innerHTML = `<div style="text-align:center;padding:18px;border:1px dashed #eee;border-radius:12px;">Your cart is empty.</div>`;
-    subEl.textContent = fmt(0); shipEl.textContent = fmt(0); totEl.textContent = fmt(0);
+    subEl.textContent = fmt(0);
+    shipEl.textContent = fmt(0);
+    totEl.textContent  = fmt(0);
   } else {
-    let subtotal = 0;
+    let subtotalRender = 0;
     listEl.innerHTML = cart.map(ci => {
-      const p = findProduct(ci.id) || {name:"Item", image:"", price:0};
+      const p = findProduct(ci.id) || { name: "Item", image: "", price: 0 };
       const price = Number(p.price || 0);
-      const qty = Math.max(1, Number(ci.qty || 1));
-      const line = price * qty;
-      subtotal += line;
+      const qty   = Math.max(1, Number(ci.qty || 1));
+      const line  = price * qty;
+      subtotalRender += line;
       const img = p.image || PLACEHOLDER_IMG;
 
       return `
         <div class="line">
-          <img src="${img}" alt="${(p.name||'Item').replace(/"/g,'&quot;')}"
+          <img src="${img}" alt="${(p.name || "Item").replace(/"/g, "&quot;")}"
                onerror="this.src='${PLACEHOLDER_IMG}'">
           <div>
-            <div class="name">${p.name || 'Item'}</div>
+            <div class="name">${p.name || "Item"}</div>
             <div>Qty: ${qty}</div>
           </div>
           <div>${fmt(line)}</div>
         </div>`;
     }).join("");
 
-    // shipping rule (edit if you like)
-    const shipping = 20; // flat rate; or use: subtotal > 300 ? 0 : 20;
-    subEl.textContent = fmt(subtotal);
-    shipEl.textContent = fmt(cart.length ? shipping : 0);
-    totEl.textContent  = fmt(cart.length ? (subtotal + shipping) : 0);
+    const shippingRender = 20; // flat rate; change rule if needed
+    subEl.textContent = fmt(subtotalRender);
+    shipEl.textContent = fmt(shippingRender);
+    totEl.textContent  = fmt(subtotalRender + shippingRender);
   }
 
   // --- prefill from user
   (function prefill(){
-    const u = getUser(); if(!u) return;
-    const full = document.getElementById("fullName");
-    const email= document.getElementById("email");
-    if(u.username && full && !full.value) full.value = u.username;
-    if(u.email && email && !email.value) email.value = u.email;
+    const u = getUser(); if (!u) return;
+    const full  = document.getElementById("fullName");
+    const email = document.getElementById("email");
+    if (u.username && full  && !full.value)  full.value  = u.username;
+    if (u.email    && email && !email.value) email.value = u.email;
   })();
 
   // --- submission
-  document.getElementById("checkout-form").addEventListener("submit", (e)=>{
+  document.getElementById("checkout-form").addEventListener("submit", (e) => {
     e.preventDefault();
+
     const data = Object.fromEntries(new FormData(e.currentTarget).entries());
     const user = getUser();
-    const products = getProducts();
+    const freshCart = getCart();
+    if (!freshCart.length) {
+      alert("Your cart is empty.");
+      return;
+    }
 
-    // rebuild totals in case quantities changed elsewhere
+    // Rebuild totals at submit time
     let subtotal = 0;
-    const items = getCart().map(ci=>{
-      const p = (products.find(x=>x.id===ci.id) || {name:"Item", price:0});
-      const qty = Math.max(1, Number(ci.qty || 1));
+    const items = freshCart.map(ci => {
+      const p = findProduct(ci.id) || {};
       const price = Number(p.price || 0);
+      const qty   = Math.max(1, Number(ci.qty || 1));
       subtotal += price * qty;
-      return { id: ci.id, name: p.name, price, qty };
+      return {
+        id: ci.id,
+        name: p.name || "Item",
+        price,
+        qty,
+        image: p.image || ""
+      };
     });
-    const shipping = items.length ? 20 : 0;
-    const total = subtotal + shipping;
 
+    const shipping = 20; // or (subtotal > 300 ? 0 : 20)
     const order = {
       id: "GW" + Date.now(),
       date: new Date().toISOString(),
       user: { username: user?.username || "", email: user?.email || "" },
       contact: data,
-      items, subtotal, shipping, total
+      items,
+      subtotal,
+      shipping,
+      total: subtotal + shipping
     };
 
-    // save for admin (local)
-    const ORDERS_KEY = "gw_orders";
-    let orders = [];
-    try{ orders = JSON.parse(localStorage.getItem(ORDERS_KEY)||"[]"); }catch{}
-    orders.unshift(order);
-    localStorage.setItem(ORDERS_KEY, JSON.stringify(orders));
+    // Save for admin (local)
+    try {
+      const ORDERS_KEY = "gw_orders";
+      const prev = JSON.parse(localStorage.getItem(ORDERS_KEY) || "[]");
+      prev.unshift(order);
+      localStorage.setItem(ORDERS_KEY, JSON.stringify(prev));
+    } catch {}
 
-    // clear cart
+    // Clear cart
     localStorage.setItem(CART_KEY, "[]");
 
-    // mailto to admin (opens user mail app)
+    // Send to admin via mailto (opens email client)
     const body =
 `New order: ${order.id}
 Date: ${order.date}
@@ -211,7 +229,7 @@ Phone: ${data.phone}
 Address: ${data.address}, ${data.city}, ${data.region}
 
 Items:
-${order.items.map(i => "- "+i.name+" x"+i.qty+" — "+fmt(i.price*i.qty)).join("\n")}
+${order.items.map(i => "- " + i.name + " x" + i.qty + " — " + fmt(i.price * i.qty)).join("\n")}
 
 Subtotal: ${fmt(order.subtotal)}
 Shipping: ${fmt(order.shipping)}
@@ -225,15 +243,8 @@ ${data.notes || "(none)"}`;
       + "&body=" + encodeURIComponent(body);
     window.open(mailto, "_blank"); // best-effort
 
-    // Thank-you inline
-    const s = document.getElementById("order-success");
-    s.style.display = "block";
-    s.innerHTML = `
-      <strong>Thank you!</strong> Your order <b>${order.id}</b> was received.
-      We’ve sent the order details to our team — we’ll contact you shortly.`;
-
-    // Optionally: location.href = "thank-you.html?id=" + order.id;
-    location.href = "thank-you.html?id=" + order.id;
+    // Redirect to Thank You page
+    location.href = "thank-you.html?id=" + encodeURIComponent(order.id);
   });
 })();
 </script>
