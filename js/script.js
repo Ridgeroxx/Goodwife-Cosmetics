@@ -11,6 +11,10 @@
   let PRODUCTS = [
     // { id: "p1", name: "Moisturizing Cream", image: "images/Product-1.jpg", price: 130, oldPrice: 150, category: "Skincare" },
   ];
+  function persistProducts() {
+  try { localStorage.setItem('GW_PRODUCTS', JSON.stringify(PRODUCTS)); } catch {}
+}
+
 
   // ---------- Helpers ----------
   const $  = (s) => document.querySelector(s);
@@ -461,6 +465,7 @@ function readProductFromArrivalsSlide(slide) {
     if (p) {
       if (!byId(p.id)) { PRODUCTS = mergeProducts(PRODUCTS, [p]); }
       addToCart(p.id, 1);
+      persistProducts();           // <-- ADD after merging a new product
     }
    }
     });
@@ -570,6 +575,7 @@ document.addEventListener("DOMContentLoaded", initNavbarAndForms);
     // Merge: Seeds -> DOM -> Images
     PRODUCTS = mergeProducts(PRODUCTS, domProducts);
     PRODUCTS = mergeProducts(PRODUCTS, imgProducts);
+    persistProducts();
 
     // Render & bind
     renderGrid(PRODUCTS, "all-products-grid");
@@ -602,8 +608,15 @@ document.addEventListener("DOMContentLoaded", initNavbarAndForms);
 
 /* Storage helpers must match login page keys */
 function GW_getAuthUser() {
-  try { return JSON.parse(localStorage.getItem("gw_current_user") || "null"); } catch { return null; }
+  try {
+    const a = localStorage.getItem("gw_current_user");
+    if (a && a !== "null") return JSON.parse(a);
+    const b = localStorage.getItem("authUser"); // legacy fallback
+    if (b && b !== "null") return JSON.parse(b);
+  } catch {}
+  return null;
 }
+
 function GW_logout() {
   localStorage.removeItem("gw_current_user");
   location.reload();
@@ -669,23 +682,29 @@ function GW_applyAuthHeader() {
 
 /* Checkout gate: if not logged in -> send to login; else go to checkout.html */
 function GW_applyCheckoutGate() {
-  const btn = document.getElementById("checkout-btn");
-  if (!btn) return;
+  const old = document.getElementById("checkout-btn");
+  if (!old) return;
 
-  btn.onclick = null;
+  // Remove any previous listeners registered earlier
+  const btn = old.cloneNode(true);
+  old.parentNode.replaceChild(btn, old);
+
   btn.addEventListener("click", (e) => {
     e.preventDefault();
     const user = GW_getAuthUser();
+
     if (!user) {
-      // This builds an absolute URL to checkout.html (works on http and file://)
+      // Build an absolute URL to checkout.html and send user to login with redirect back
       const target = new URL("checkout.html", location.href).href;
       location.href = `Sliding-Sign-In-Sign-Up-Form-master/login.html?redirect=${encodeURIComponent(target)}`;
       return;
     }
-    // Already logged in
+
+    // Already logged in → straight to checkout
     location.href = "checkout.html";
   });
 }
+
 
 /* Run on page load */
 document.addEventListener("DOMContentLoaded", () => {
